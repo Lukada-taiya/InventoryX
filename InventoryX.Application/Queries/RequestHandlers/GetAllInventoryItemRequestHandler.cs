@@ -16,11 +16,7 @@ namespace InventoryX.Application.Queries.RequestHandlers
         {
             try
             {
-                var response = await _service.GetAllInventoryItems();
-                if (response is null) {
-                    throw new Exception("Failed to retrieve all inventory items");
-                }
-
+                var response = await _service.GetAllInventoryItems() ?? throw new Exception("Failed to retrieve all inventory items");
                 return new()
                 {
                     Success = true,

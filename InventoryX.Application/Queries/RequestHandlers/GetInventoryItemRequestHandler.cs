@@ -1,5 +1,4 @@
-﻿using InventoryX.Application.Services;
-using InventoryX.Domain.Data;
+﻿using InventoryX.Application.Services; 
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -16,12 +15,8 @@ namespace InventoryX.Application.Queries.Requests
         {
             try
             {
-                var response = await _service.GetInventoryItem(request.Id);
-                if (response is null)
-                {
-                    throw new Exception("Inventory Item does not exist");
-                }
-                    return new ApiResponse
+                var response = await _service.GetInventoryItem(request.Id) ?? throw new Exception("Inventory Item does not exist");
+                return new ApiResponse
                     {
                         Success = true,
                         Message = "Retrieved inventory items successfully",

@@ -10,3 +10,9 @@ C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Application\obj\Debug\ne
 C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Application\obj\Debug\net8.0\refint\InventoryX.Application.dll
 C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Application\obj\Debug\net8.0\InventoryX.Application.pdb
 C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Application\obj\Debug\net8.0\ref\InventoryX.Application.dll
+C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Application\obj\Debug\net8.0\InventoryX.Application.csproj.AssemblyReference.cache
+C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Application\bin\Debug\net8.0\InventoryX.Domain.dll
+C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Application\bin\Debug\net8.0\InventoryX.Infrastructure.dll
+C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Application\bin\Debug\net8.0\InventoryX.Domain.pdb
+C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Application\bin\Debug\net8.0\InventoryX.Infrastructure.pdb
+C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Application\obj\Debug\net8.0\InventoryX.Application.csproj.CopyComplete
