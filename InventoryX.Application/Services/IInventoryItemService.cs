@@ -1,4 +1,4 @@
-﻿using InventoryX.Domain.Data;
+﻿using InventoryX.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
