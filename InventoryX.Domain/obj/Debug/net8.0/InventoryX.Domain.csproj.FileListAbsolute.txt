@@ -10,3 +10,4 @@ C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Domain\obj\Debug\net8.0\
 C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Domain\obj\Debug\net8.0\refint\InventoryX.Domain.dll
 C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Domain\obj\Debug\net8.0\InventoryX.Domain.pdb
 C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Domain\obj\Debug\net8.0\ref\InventoryX.Domain.dll
+C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Domain\obj\Debug\net8.0\InventoryX.Domain.csproj.AssemblyReference.cache
