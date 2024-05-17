@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using InventoryX.Application.DTOs;
-using InventoryX.Domain.Data;
+using InventoryX.Application.DTOs; 
+using InventoryX.Domain.Models;
 
 namespace InventoryX.Presentation.Configuration
 {
