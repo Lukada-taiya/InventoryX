@@ -1,5 +1,4 @@
 C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Infrastructure\bin\Debug\net8.0\InventoryX.Infrastructure.deps.json
-C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Infrastructure\bin\Debug\net8.0\InventoryX.Infrastructure.runtimeconfig.json
 C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Infrastructure\bin\Debug\net8.0\InventoryX.Infrastructure.dll
 C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Infrastructure\bin\Debug\net8.0\InventoryX.Infrastructure.pdb
 C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Infrastructure\obj\Debug\net8.0\InventoryX.Infrastructure.csproj.AssemblyReference.cache
@@ -11,5 +10,7 @@ C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Infrastructure\obj\Debug
 C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Infrastructure\obj\Debug\net8.0\InventoryX.Infrastructure.dll
 C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Infrastructure\obj\Debug\net8.0\refint\InventoryX.Infrastructure.dll
 C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Infrastructure\obj\Debug\net8.0\InventoryX.Infrastructure.pdb
-C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Infrastructure\obj\Debug\net8.0\InventoryX.Infrastructure.genruntimeconfig.cache
 C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Infrastructure\obj\Debug\net8.0\ref\InventoryX.Infrastructure.dll
+C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Infrastructure\bin\Debug\net8.0\InventoryX.Domain.dll
+C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Infrastructure\bin\Debug\net8.0\InventoryX.Domain.pdb
+C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Infrastructure\obj\Debug\net8.0\InventoryX.Infrastructure.csproj.CopyComplete

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InventoryX.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+70ba7717875d30092c439d8290d2110fd823c10e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cd2d3abf44c919e76d66b9e4705496546b7a0e36")]
 [assembly: System.Reflection.AssemblyProductAttribute("InventoryX.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InventoryX.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

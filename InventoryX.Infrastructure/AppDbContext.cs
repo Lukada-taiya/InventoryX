@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using InventoryX.Domain.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,14 @@ namespace InventoryX.Infrastructure
         
         }
 
+        public DbSet<InventoryItem> InventoryItems { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<InventoryItem>(entity =>
+            {
+                entity.HasKey(x => x.Id);
+            });
         }
-
-
     }
 }
