@@ -33,15 +33,23 @@ namespace InventoryX.Presentation.Controllers
         [HttpPost]
         public async Task<ActionResult> Add(InventoryItemCommandDto inventoryItem)
         {
-            var response = await _mediator.Send(new CreateInventoryItemCommand { NewInventoryItemDto = inventoryItem });
-            return response.Success ? Ok(response) : BadRequest(response);
+            if (ModelState.IsValid)
+            {
+                var response = await _mediator.Send(new CreateInventoryItemCommand { NewInventoryItemDto = inventoryItem });
+                return response.Success ? Ok(response) : BadRequest(response);
+            }
+            return BadRequest(ModelState);
         }
         [HttpPut]
         [Route("{id}")]
         public async Task<ActionResult> Update(int id, InventoryItemCommandDto inventoryItem)
         {
-            var response = await _mediator.Send(new UpdateInventoryItemCommand { Id = id, InventoryItemDto = inventoryItem });
-            return response.Success ? Ok(response) : BadRequest(response);
+            if(ModelState.IsValid)
+            {
+                var response = await _mediator.Send(new UpdateInventoryItemCommand { Id = id, InventoryItemDto = inventoryItem });
+                return response.Success ? Ok(response) : BadRequest(response);
+            }
+            return BadRequest(ModelState);
         }
         [HttpDelete]
         [Route("{id}")]

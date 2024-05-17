@@ -14,7 +14,6 @@ C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Presentation\obj\Debug\n
 C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Presentation\obj\Debug\net8.0\InventoryX.Presentation.AssemblyInfoInputs.cache
 C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Presentation\obj\Debug\net8.0\InventoryX.Presentation.AssemblyInfo.cs
 C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Presentation\obj\Debug\net8.0\InventoryX.Presentation.csproj.CoreCompileInputs.cache
-C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Presentation\obj\Debug\net8.0\InventoryX.Presentation.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Presentation\obj\Debug\net8.0\InventoryX.Presentation.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Presentation\obj\Debug\net8.0\InventoryX.Presentation.sourcelink.json
 C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Presentation\obj\Debug\net8.0\staticwebassets.build.json
@@ -81,3 +80,11 @@ C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Presentation\bin\Debug\n
 C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Presentation\bin\Debug\net8.0\Scrutor.dll
 C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Presentation\bin\Debug\net8.0\Swashbuckle.AspNetCore.Filters.dll
 C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Presentation\bin\Debug\net8.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll
+C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Presentation\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Presentation\bin\Debug\net8.0\MediatR.dll
+C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Presentation\bin\Debug\net8.0\MediatR.Contracts.dll
+C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Presentation\bin\Debug\net8.0\InventoryX.Application.dll
+C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Presentation\bin\Debug\net8.0\InventoryX.Domain.dll
+C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Presentation\bin\Debug\net8.0\InventoryX.Application.pdb
+C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Presentation\bin\Debug\net8.0\InventoryX.Domain.pdb
+C:\Users\lukman.adam\source\repos\InventoryX\InventoryX.Presentation\obj\Debug\net8.0\InventoryX.Presentation.MvcApplicationPartsAssemblyInfo.cs
