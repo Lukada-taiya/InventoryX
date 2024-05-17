@@ -6,13 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\InventoryX.Application\InventoryX.Application.csproj" />
-    <ProjectReference Include="..\InventoryX.Infrastructure\InventoryX.Infrastructure.csproj" />
-  </ItemGroup>
-
 </Project>
