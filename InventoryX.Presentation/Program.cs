@@ -1,3 +1,4 @@
+using InventoryX.Domain.Models;
 using InventoryX.Infrastructure;
 using InventoryX.Presentation.Configuration;
 using Microsoft.AspNetCore.Identity;
@@ -13,7 +14,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.MapIdentityApi<IdentityUser>();
+app.MapIdentityApi<User>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

@@ -1,4 +1,5 @@
-﻿using InventoryX.Application.Services; 
+﻿using InventoryX.Application.Services;
+using InventoryX.Domain.Models;
 using InventoryX.Infrastructure;
 using InventoryX.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
@@ -45,7 +46,7 @@ namespace InventoryX.Presentation.Configuration
         public static IServiceCollection AddAuth(this IServiceCollection services)
         {
             services.AddAuthentication();
-            services.AddIdentityApiEndpoints<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddIdentityApiEndpoints<User>().AddEntityFrameworkStores<AppDbContext>();
             return services;
         }
 
