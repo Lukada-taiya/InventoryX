@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using InventoryX.Application.Commands.Requests;
-using InventoryX.Application.Services;
+using InventoryX.Application.Services.Common;
 using InventoryX.Domain.Models;
 using MediatR;
 using System;
@@ -22,6 +22,7 @@ namespace InventoryX.Application.Commands.RequestHandlers
             {
                 var InventoryItemEntity = _mapper.Map<InventoryItem>(request.InventoryItemDto);
                 InventoryItemEntity.Id = request.Id;
+                InventoryItemEntity.Updated_At = DateTime.UtcNow;
                 var response = await _service.UpdateInventoryItem(InventoryItemEntity);
                 if (response > 0)
                 {
