@@ -23,7 +23,7 @@ namespace InventoryX.Infrastructure
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<InventoryItem>().HasOne(e => e.Type).WithMany(e => e.InventoryItems).HasForeignKey(e => e.TypeId).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<InventoryItem>().HasOne(e => e.Type).WithMany().HasForeignKey(e => e.TypeId).OnDelete(DeleteBehavior.Restrict);
             builder.Entity<Sale>()
             .HasOne(s => s.Seller)
             .WithMany(p => p.Sales)

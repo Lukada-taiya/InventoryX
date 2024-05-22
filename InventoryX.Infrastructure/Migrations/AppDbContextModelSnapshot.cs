@@ -59,7 +59,7 @@ namespace InventoryX.Infrastructure.Migrations
 
                     b.HasIndex("TypeId");
 
-                    b.ToTable("InventoryItems");
+                    b.ToTable("InventoryItems", (string)null);
                 });
 
             modelBuilder.Entity("InventoryX.Domain.Models.InventoryItemType", b =>
@@ -82,7 +82,7 @@ namespace InventoryX.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("InventoryItemTypes");
+                    b.ToTable("InventoryItemTypes", (string)null);
                 });
 
             modelBuilder.Entity("InventoryX.Domain.Models.Purchase", b =>
@@ -118,7 +118,7 @@ namespace InventoryX.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Purchases");
+                    b.ToTable("Purchases", (string)null);
                 });
 
             modelBuilder.Entity("InventoryX.Domain.Models.Sale", b =>
@@ -154,7 +154,7 @@ namespace InventoryX.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Sales");
+                    b.ToTable("Sales", (string)null);
                 });
 
             modelBuilder.Entity("InventoryX.Domain.Models.User", b =>
