@@ -1,6 +1,8 @@
-﻿using System;
+﻿using InventoryX.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +15,9 @@ namespace InventoryX.Application.DTOs
         public required string Name { get; set; }
         public string? Description { get; set; }
         [Required]
-        public required string Type { get; set; }
+        public required int TypeId { get; set; }
         public byte[]? Image { get; set; }
+        public required decimal Price { get; set; } 
+        public decimal TotalAmount { get; set; } 
     }
 }
