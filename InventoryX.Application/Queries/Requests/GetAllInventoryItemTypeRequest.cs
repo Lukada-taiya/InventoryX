@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InventoryX.Application.Queries.Requests
 {
-    public class GetAllInventoryItemRequest : IRequest<ApiResponse>
+    public class GetAllInventoryItemTypeRequest : IRequest<ApiResponse>
     {
     }
 }
