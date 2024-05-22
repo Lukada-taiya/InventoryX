@@ -15,7 +15,7 @@ namespace InventoryX.Presentation.Controllers
     { 
         private readonly IMediator _mediator = mediator;
 
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         public async Task<ActionResult> Get(int id)
         {
             var response = await _mediator.Send(new GetInventoryItemTypeRequest { Id = id });

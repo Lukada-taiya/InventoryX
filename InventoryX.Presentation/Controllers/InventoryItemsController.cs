@@ -15,15 +15,14 @@ namespace InventoryX.Presentation.Controllers
     { 
         private readonly IMediator _mediator = mediator;
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<ActionResult> Get(int id)
         {
             var response = await _mediator.Send(new GetInventoryItemRequest { Id = id });
             return response.Success ? Ok(response) : BadRequest(response);
         }
 
-        [HttpGet]
-        [Route("GetAll")]
+        [HttpGet] 
         public async Task<ActionResult> GetAll()
         {
             var response = await _mediator.Send(new GetAllInventoryItemRequest());
@@ -42,11 +41,11 @@ namespace InventoryX.Presentation.Controllers
         }
         [HttpPut]
         [Route("{id}")]
-        public async Task<ActionResult> Update(int id, InventoryItemCommandDto inventoryItem)
+        public async Task<ActionResult> Update(int id, InventoryTypeCommandDto inventoryItem)
         {
             if(ModelState.IsValid)
             {
-                var response = await _mediator.Send(new UpdateInventoryItemCommand { Id = id, InventoryItemDto = inventoryItem });
+                var response = await _mediator.Send(new UpdateInventoryItemTypeCommand { Id = id, InventoryItemTypeDto = inventoryItem });
                 return response.Success ? Ok(response) : BadRequest(response);
             }
             return BadRequest(ModelState);
