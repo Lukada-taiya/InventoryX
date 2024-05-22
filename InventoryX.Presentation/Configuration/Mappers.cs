@@ -9,6 +9,9 @@ namespace InventoryX.Presentation.Configuration
         public Mappers()
         {
             CreateMap<InventoryItemCommandDto, InventoryItem>().ReverseMap();
+            CreateMap<InventoryTypeCommandDto, InventoryItemType>().ReverseMap();
+            CreateMap<GetInventoryTypeDto, InventoryItemType>().ReverseMap();
+            CreateMap<GetInventoryItemDto, InventoryItem>().ReverseMap();
         }
     }
 }
