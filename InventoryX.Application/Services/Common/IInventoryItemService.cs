@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryX.Application.Services
+namespace InventoryX.Application.Services.Common
 {
     public interface IInventoryItemService
     {
