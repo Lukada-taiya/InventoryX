@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InventoryX.Application.Commands.Requests
 {
-    public class DeleteInventoryItemCommand : IRequest<ApiResponse>
+    public class DeleteInventoryItemTypeCommand : IRequest<ApiResponse>
     {
         public int Id { get; set; }
     }
