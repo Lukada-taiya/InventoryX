@@ -19,7 +19,7 @@ namespace InventoryX.Infrastructure
         public DbSet<InventoryItemType> InventoryItemTypes { get; set; }
         public DbSet<Sale> Sales { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
-        public DbSet<User> Users { get; set; }
+        public override DbSet<User> Users { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
