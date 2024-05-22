@@ -1,10 +1,13 @@
-﻿using InventoryX.Application.Services; 
+﻿using InventoryX.Application.Services;
+using InventoryX.Application.Services.Common;
+using InventoryX.Domain.Models;
 using InventoryX.Infrastructure;
 using InventoryX.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using System.Text.Json.Serialization;
 
 namespace InventoryX.Presentation.Configuration
 {
@@ -23,11 +26,17 @@ namespace InventoryX.Presentation.Configuration
             services.AddAutoMapper(typeof(Program).Assembly);
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
             services.AddTransient<IInventoryItemService, InventoryItemService>();
+            services.AddTransient<IInventoryTypeService, InventoryTypeService>();
             return services;
         }
         public static IServiceCollection AddPresentation(this IServiceCollection services)
         {
             services.AddControllers();
+            //Add if only there is a cyclical reference
+            //    .AddJsonOptions(options =>
+            //{
+            //    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+            //});  
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(opt => {
                 opt.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
@@ -45,7 +54,7 @@ namespace InventoryX.Presentation.Configuration
         public static IServiceCollection AddAuth(this IServiceCollection services)
         {
             services.AddAuthentication();
-            services.AddIdentityApiEndpoints<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddIdentityApiEndpoints<User>().AddEntityFrameworkStores<AppDbContext>();
             return services;
         }
 

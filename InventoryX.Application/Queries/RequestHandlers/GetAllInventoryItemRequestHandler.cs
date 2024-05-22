@@ -1,5 +1,7 @@
-﻿using InventoryX.Application.Queries.Requests;
-using InventoryX.Application.Services; 
+﻿using AutoMapper;
+using InventoryX.Application.DTOs;
+using InventoryX.Application.Queries.Requests;
+using InventoryX.Application.Services.Common;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -9,14 +11,16 @@ using System.Threading.Tasks;
 
 namespace InventoryX.Application.Queries.RequestHandlers
 {
-    public class GetAllInventoryItemRequestHandler(IInventoryItemService service) : IRequestHandler<GetAllInventoryItemRequest, ApiResponse>
+    public class GetAllInventoryItemRequestHandler(IInventoryItemService service, IMapper mapper) : IRequestHandler<GetAllInventoryItemRequest, ApiResponse>
     {
         private readonly IInventoryItemService _service = service;
+        private readonly IMapper _mapper = mapper;
         public async Task<ApiResponse> Handle(GetAllInventoryItemRequest request, CancellationToken cancellationToken)
         {
             try
             {
                 var response = await _service.GetAllInventoryItems() ?? throw new Exception("Failed to retrieve all inventory items");
+                var InventoryItemDtos = _mapper.Map<IEnumerable<GetInventoryItemDto>>(response);
                 return new()
                 {
                     Success = true,

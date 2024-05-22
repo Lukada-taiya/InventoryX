@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace InventoryX.Infrastructure.Persistence
 {
-    public class BaseRepository<TEntity> (AppDbContext context): IBaseRepository<TEntity> where TEntity : class
+    public class BaseRepository<TEntity>(AppDbContext context) : IBaseRepository<TEntity> where TEntity : class
     {
         private readonly AppDbContext _context = context;
         public async Task<int> Add(TEntity entity)
@@ -37,7 +38,17 @@ namespace InventoryX.Infrastructure.Persistence
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<TEntity> Get(int id) => await _context.FindAsync<TEntity>(id);
+        public async Task<TEntity> Get(int id, params Expression<Func<TEntity, object>>[] includes)
+        {
+            IQueryable<TEntity> query = _context.Set<TEntity>();
+             
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
+
+            return await query.FirstOrDefaultAsync(e => EF.Property<int>(e, "Id") == id);
+        }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync() => await _context.Set<TEntity>().ToListAsync();
         public async Task<int> Update(TEntity entity)
@@ -48,6 +59,6 @@ namespace InventoryX.Infrastructure.Persistence
             _context.Entry(entityToUpdate).CurrentValues.SetValues(entity);
              
             return await _context.SaveChangesAsync();
-        }
+        }         
     }
 }

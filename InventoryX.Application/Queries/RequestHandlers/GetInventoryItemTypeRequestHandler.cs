@@ -10,21 +10,21 @@ using System.Threading.Tasks;
 
 namespace InventoryX.Application.Queries.Requests
 {
-    public class GetInventoryItemRequestHandler(IInventoryItemService service, IMapper mapper) : IRequestHandler<GetInventoryItemRequest, ApiResponse>
+    public class GetInventoryItemTypeRequestHandler(IInventoryTypeService service, IMapper mapper) : IRequestHandler<GetInventoryItemTypeRequest, ApiResponse>
     { 
-        private readonly IInventoryItemService _service = service;
+        private readonly IInventoryTypeService _service = service;
         private readonly IMapper _mapper = mapper;
-        public async Task<ApiResponse> Handle(GetInventoryItemRequest request, CancellationToken cancellationToken)
+        public async Task<ApiResponse> Handle(GetInventoryItemTypeRequest request, CancellationToken cancellationToken)
         {
             try
             {
-                var response = await _service.GetInventoryItem(request.Id) ?? throw new Exception("Inventory Item does not exist");
-                var InventoryItemDto = _mapper.Map<GetInventoryItemDto>(response);
+                var response = await _service.GetInventoryItemType(request.Id) ?? throw new Exception("Inventory Item Type does not exist");
+                var InventoryItemTypeDto = _mapper.Map<GetInventoryTypeDto>(response);
                 return new ApiResponse
                     {
                         Success = true,
-                        Message = "Retrieved inventory items successfully",
-                        Body = InventoryItemDto
+                        Message = "Retrieved inventory item types successfully",
+                        Body = InventoryItemTypeDto
                     };
             }catch(Exception ex)
             {
@@ -35,6 +35,6 @@ namespace InventoryX.Application.Queries.Requests
                 };
 
             }
-        }
+        } 
     }
 }

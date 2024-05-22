@@ -10,24 +10,24 @@ using System.Threading.Tasks;
 
 namespace InventoryX.Application.Commands.RequestHandlers
 {
-    public class DeleteInventoryItemCommandHandler(IInventoryItemService service, IMapper mapper) : IRequestHandler<DeleteInventoryItemCommand, ApiResponse>
+    public class DeleteInventoryItemTypeCommandHandler(IInventoryTypeService service, IMapper mapper) : IRequestHandler<DeleteInventoryItemTypeCommand, ApiResponse>
     {
-        private readonly IInventoryItemService _service = service;
-        private readonly IMapper _mapper = mapper;
-        public async Task<ApiResponse> Handle(DeleteInventoryItemCommand request, CancellationToken cancellationToken)
+        private readonly IInventoryTypeService _service = service; 
+
+        public async Task<ApiResponse> Handle(DeleteInventoryItemTypeCommand request, CancellationToken cancellationToken)
         {
             try
-            { 
-                var response = await _service.DeleteInventoryItem(request.Id);
+            {
+                var response = await _service.DeleteInventoryItemType(request.Id);
                 if (response > 0)
                 {
                     return new()
                     {
                         Success = true,
-                        Message = "Inventory Item has been deleted successfully"
+                        Message = "Inventory Item Type has been deleted successfully"
                     };
                 }
-                throw new Exception("Failed to delete Inventory Item");
+                throw new Exception("Failed to delete Inventory Item Type");
             }
             catch (Exception ex)
             {

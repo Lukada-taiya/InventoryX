@@ -1,4 +1,5 @@
-﻿using InventoryX.Domain.Models;
+﻿using InventoryX.Application.Services.Common;
+using InventoryX.Domain.Models;
 using InventoryX.Infrastructure.Persistence;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,12 @@ namespace InventoryX.Application.Services
 
         public Task<InventoryItem> GetInventoryItem(int id)
         {
-            return _repository.Get(id);
+            return _repository.Get(
+                id,
+                i => i.Type,
+                i => i.Purchases,
+                i => i.Sales
+                );
         }
 
         public Task<int> UpdateInventoryItem(InventoryItem entity)
