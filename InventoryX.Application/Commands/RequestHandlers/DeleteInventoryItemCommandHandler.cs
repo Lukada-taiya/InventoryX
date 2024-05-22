@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using InventoryX.Application.Commands.Requests;
-using InventoryX.Application.Services; 
+using InventoryX.Application.Services.Common;
 using MediatR;
 using System;
 using System.Collections.Generic;
