@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using InventoryX.Application.Commands.Requests; 
-using InventoryX.Application.Services;
+using InventoryX.Application.Commands.Requests;
+using InventoryX.Application.Services.Common;
 using InventoryX.Domain.Models;
 using MediatR;
 using System;
@@ -20,6 +20,7 @@ namespace InventoryX.Application.Commands.RequestHandlers
             try
             {
                 var InventoryItemEntity = _mapper.Map<InventoryItem>(request.NewInventoryItemDto);
+                InventoryItemEntity.Created_At = DateTime.UtcNow;
                 var response = await _service.AddInventoryItem(InventoryItemEntity);
                 if(response > 0)
                 {
