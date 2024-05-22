@@ -1,4 +1,6 @@
-﻿using InventoryX.Application.Services; 
+﻿using AutoMapper;
+using InventoryX.Application.DTOs;
+using InventoryX.Application.Services.Common;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,19 +10,21 @@ using System.Threading.Tasks;
 
 namespace InventoryX.Application.Queries.Requests
 {
-    public class GetInventoryItemRequestHandler(IInventoryItemService service) : IRequestHandler<GetInventoryItemRequest, ApiResponse>
+    public class GetInventoryItemRequestHandler(IInventoryItemService service, IMapper mapper) : IRequestHandler<GetInventoryItemRequest, ApiResponse>
     { 
         private readonly IInventoryItemService _service = service;
+        private readonly IMapper _mapper = mapper;
         public async Task<ApiResponse> Handle(GetInventoryItemRequest request, CancellationToken cancellationToken)
         {
             try
             {
                 var response = await _service.GetInventoryItem(request.Id) ?? throw new Exception("Inventory Item does not exist");
+                var InventoryItemDto = _mapper.Map<GetInventoryItemDto>(response);
                 return new ApiResponse
                     {
                         Success = true,
                         Message = "Retrieved inventory items successfully",
-                        Body = response
+                        Body = InventoryItemDto
                     };
             }catch(Exception ex)
             {
