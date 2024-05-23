@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryX.Application.DTOs
+namespace InventoryX.Application.DTOs.InventoryItems
 {
     public class InventoryItemCommandDto
     {
@@ -17,7 +17,7 @@ namespace InventoryX.Application.DTOs
         [Required]
         public required int TypeId { get; set; }
         public byte[]? Image { get; set; }
-        public required decimal Price { get; set; } 
-        public decimal TotalAmount { get; set; } 
+        public required decimal Price { get; set; }
+        public decimal TotalAmount { get; set; }
     }
 }

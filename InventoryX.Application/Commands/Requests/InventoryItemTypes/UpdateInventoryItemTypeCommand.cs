@@ -1,4 +1,4 @@
-﻿using InventoryX.Application.DTOs;
+﻿using InventoryX.Application.DTOs.InventoryItemTypes;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryX.Application.Commands.Requests
+namespace InventoryX.Application.Commands.Requests.InventoryItemTypes
 {
     public class UpdateInventoryItemTypeCommand : IRequest<ApiResponse>
     {
-        public int Id { get; set; } 
-        public required InventoryTypeCommandDto InventoryItemTypeDto { get; set; }
+        public int Id { get; set; }
+        public required InventoryItemTypeCommandDto InventoryItemTypeDto { get; set; }
     }
 }

@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryX.Application.DTOs
+namespace InventoryX.Application.DTOs.InventoryItemTypes
 {
-    public class InventoryTypeCommandDto
+    public class InventoryItemTypeCommandDto
     {
         [Required]
-        public required string Name { get; set; } 
+        public required string Name { get; set; }
     }
 }

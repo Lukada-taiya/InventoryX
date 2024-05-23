@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryX.Application.DTOs
+namespace InventoryX.Application.DTOs.InventoryItemTypes
 {
-    public class GetInventoryTypeDto
+    public class GetInventoryItemTypeDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

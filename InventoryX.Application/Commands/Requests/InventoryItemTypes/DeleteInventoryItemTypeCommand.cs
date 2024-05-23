@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryX.Application.Commands.Requests
+namespace InventoryX.Application.Commands.Requests.InventoryItemTypes
 {
     public class DeleteInventoryItemTypeCommand : IRequest<ApiResponse>
     {

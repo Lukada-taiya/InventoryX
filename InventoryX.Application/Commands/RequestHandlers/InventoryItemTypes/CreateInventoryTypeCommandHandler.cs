@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using InventoryX.Application.Commands.Requests;
+using InventoryX.Application.Commands.Requests.InventoryItemTypes;
 using InventoryX.Application.Services.Common;
 using InventoryX.Domain.Models;
 using MediatR;
@@ -9,20 +9,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryX.Application.Commands.RequestHandlers
+namespace InventoryX.Application.Commands.RequestHandlers.InventoryItemTypes
 {
-    public class CreateInventoryItemCommandHandler(IInventoryItemService service, IMapper mapper) : IRequestHandler<CreateInventoryItemCommand, ApiResponse>
+    public class CreateInventoryTypeCommandHandler(IInventoryItemTypeService service, IMapper mapper) : IRequestHandler<CreateInventoryTypeCommand, ApiResponse>
     {
-        private readonly IInventoryItemService _service= service;
+        private readonly IInventoryItemTypeService _service = service;
         private readonly IMapper _mapper = mapper;
-        public async Task<ApiResponse> Handle(CreateInventoryItemCommand request, CancellationToken cancellationToken)
+        public async Task<ApiResponse> Handle(CreateInventoryTypeCommand request, CancellationToken cancellationToken)
         {
             try
             {
-                var InventoryItemEntity = _mapper.Map<InventoryItem>(request.NewInventoryItemDto);
-                InventoryItemEntity.Created_At = DateTime.UtcNow;
-                var response = await _service.AddInventoryItem(InventoryItemEntity);
-                if(response > 0)
+                var InventoryItemTypeEntity = _mapper.Map<InventoryItemType>(request.NewInventoryItemTypeDto);
+                InventoryItemTypeEntity.Created_At = DateTime.UtcNow;
+                var response = await _service.AddInventoryItemType(InventoryItemTypeEntity);
+                if (response > 0)
                 {
                     return new()
                     {
@@ -32,14 +32,15 @@ namespace InventoryX.Application.Commands.RequestHandlers
                     };
                 }
                 throw new Exception("Failed to create Inventory Item");
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return new()
                 {
                     Success = false,
                     Message = ex.Message ?? "Something went wrong. Try again later."
                 };
-            } 
+            }
         }
     }
 }

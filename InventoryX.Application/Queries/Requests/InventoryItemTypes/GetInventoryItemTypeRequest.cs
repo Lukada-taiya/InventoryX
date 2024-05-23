@@ -1,14 +1,13 @@
-﻿using InventoryX.Application.DTOs;
-using MediatR;
+﻿using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryX.Application.Queries.Requests
+namespace InventoryX.Application.Queries.Requests.InventoryItemTypes
 {
-    public class GetInventoryItemRequest : IRequest<ApiResponse>
+    public class GetInventoryItemTypeRequest : IRequest<ApiResponse>
     {
         public int Id { get; set; }
     }

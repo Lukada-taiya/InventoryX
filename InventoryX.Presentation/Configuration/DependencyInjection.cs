@@ -26,7 +26,7 @@ namespace InventoryX.Presentation.Configuration
             services.AddAutoMapper(typeof(Program).Assembly);
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
             services.AddTransient<IInventoryItemService, InventoryItemService>();
-            services.AddTransient<IInventoryTypeService, InventoryTypeService>();
+            services.AddTransient<IInventoryItemTypeService, InventoryItemTypeService>();
             return services;
         }
         public static IServiceCollection AddPresentation(this IServiceCollection services)

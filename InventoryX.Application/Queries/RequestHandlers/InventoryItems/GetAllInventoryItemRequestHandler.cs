@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using InventoryX.Application.DTOs;
-using InventoryX.Application.Queries.Requests;
+using InventoryX.Application.DTOs.InventoryItems;
+using InventoryX.Application.Queries.Requests.InventoryItems;
 using InventoryX.Application.Services.Common;
 using MediatR;
 using System;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryX.Application.Queries.RequestHandlers
+namespace InventoryX.Application.Queries.RequestHandlers.InventoryItems
 {
     public class GetAllInventoryItemRequestHandler(IInventoryItemService service, IMapper mapper) : IRequestHandler<GetAllInventoryItemRequest, ApiResponse>
     {
@@ -27,7 +27,8 @@ namespace InventoryX.Application.Queries.RequestHandlers
                     Message = "Retrieved all inventory items successfully",
                     Body = response
                 };
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return new()
                 {

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryX.Application.Queries.Requests
+namespace InventoryX.Application.Queries.Requests.InventoryItems
 {
-    public class GetAllInventoryItemTypeRequest : IRequest<ApiResponse>
+    public class GetAllInventoryItemRequest : IRequest<ApiResponse>
     {
     }
 }

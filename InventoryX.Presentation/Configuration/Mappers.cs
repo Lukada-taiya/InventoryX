@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using InventoryX.Application.DTOs; 
+using InventoryX.Application.DTOs.InventoryItems;
+using InventoryX.Application.DTOs.InventoryItemTypes;
 using InventoryX.Domain.Models;
 
 namespace InventoryX.Presentation.Configuration
@@ -9,8 +10,8 @@ namespace InventoryX.Presentation.Configuration
         public Mappers()
         {
             CreateMap<InventoryItemCommandDto, InventoryItem>().ReverseMap();
-            CreateMap<InventoryTypeCommandDto, InventoryItemType>().ReverseMap();
-            CreateMap<GetInventoryTypeDto, InventoryItemType>().ReverseMap();
+            CreateMap<InventoryItemTypeCommandDto, InventoryItemType>().ReverseMap();
+            CreateMap<GetInventoryItemTypeDto, InventoryItemType>().ReverseMap();
             CreateMap<GetInventoryItemDto, InventoryItem>().ReverseMap();
         }
     }

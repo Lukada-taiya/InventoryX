@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using InventoryX.Application.Commands.Requests;
+using InventoryX.Application.Commands.Requests.InventoryItems;
 using InventoryX.Application.Services.Common;
 using InventoryX.Domain.Models;
 using MediatR;
@@ -9,19 +9,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryX.Application.Commands.RequestHandlers
+namespace InventoryX.Application.Commands.RequestHandlers.InventoryItems
 {
-    public class CreateInventoryTypeCommandHandler(IInventoryTypeService service, IMapper mapper) : IRequestHandler<CreateInventoryTypeCommand, ApiResponse>
+    public class CreateInventoryItemCommandHandler(IInventoryItemService service, IMapper mapper) : IRequestHandler<CreateInventoryItemCommand, ApiResponse>
     {
-        private readonly IInventoryTypeService _service= service;
-        private readonly IMapper _mapper = mapper;        
-        public async Task<ApiResponse> Handle(CreateInventoryTypeCommand request, CancellationToken cancellationToken)
+        private readonly IInventoryItemService _service = service;
+        private readonly IMapper _mapper = mapper;
+        public async Task<ApiResponse> Handle(CreateInventoryItemCommand request, CancellationToken cancellationToken)
         {
             try
             {
-                var InventoryItemTypeEntity = _mapper.Map<InventoryItemType>(request.NewInventoryItemTypeDto);
-                InventoryItemTypeEntity.Created_At = DateTime.UtcNow;
-                var response = await _service.AddInventoryItemType(InventoryItemTypeEntity);
+                var InventoryItemEntity = _mapper.Map<InventoryItem>(request.NewInventoryItemDto);
+                InventoryItemEntity.Created_At = DateTime.UtcNow;
+                var response = await _service.AddInventoryItem(InventoryItemEntity);
                 if (response > 0)
                 {
                     return new()

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using InventoryX.Application.Commands.Requests;
+using InventoryX.Application.Commands.Requests.InventoryItems;
 using InventoryX.Application.Services.Common;
 using MediatR;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryX.Application.Commands.RequestHandlers
+namespace InventoryX.Application.Commands.RequestHandlers.InventoryItems
 {
     public class DeleteInventoryItemCommandHandler(IInventoryItemService service, IMapper mapper) : IRequestHandler<DeleteInventoryItemCommand, ApiResponse>
     {
@@ -17,7 +17,7 @@ namespace InventoryX.Application.Commands.RequestHandlers
         public async Task<ApiResponse> Handle(DeleteInventoryItemCommand request, CancellationToken cancellationToken)
         {
             try
-            { 
+            {
                 var response = await _service.DeleteInventoryItem(request.Id);
                 if (response > 0)
                 {

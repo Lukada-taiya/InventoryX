@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using InventoryX.Application.DTOs;
+using InventoryX.Application.DTOs.InventoryItemTypes;
+using InventoryX.Application.Queries.Requests.InventoryItemTypes;
 using InventoryX.Application.Services.Common;
 using MediatR;
 using System;
@@ -8,25 +9,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryX.Application.Queries.Requests
+namespace InventoryX.Application.Queries.RequestHandlers.InventoryItemTypes
 {
-    public class GetInventoryItemTypeRequestHandler(IInventoryTypeService service, IMapper mapper) : IRequestHandler<GetInventoryItemTypeRequest, ApiResponse>
-    { 
-        private readonly IInventoryTypeService _service = service;
+    public class GetInventoryItemTypeRequestHandler(IInventoryItemTypeService service, IMapper mapper) : IRequestHandler<GetInventoryItemTypeRequest, ApiResponse>
+    {
+        private readonly IInventoryItemTypeService _service = service;
         private readonly IMapper _mapper = mapper;
         public async Task<ApiResponse> Handle(GetInventoryItemTypeRequest request, CancellationToken cancellationToken)
         {
             try
             {
                 var response = await _service.GetInventoryItemType(request.Id) ?? throw new Exception("Inventory Item Type does not exist");
-                var InventoryItemTypeDto = _mapper.Map<GetInventoryTypeDto>(response);
+                var InventoryItemTypeDto = _mapper.Map<GetInventoryItemTypeDto>(response);
                 return new ApiResponse
-                    {
-                        Success = true,
-                        Message = "Retrieved inventory item types successfully",
-                        Body = InventoryItemTypeDto
-                    };
-            }catch(Exception ex)
+                {
+                    Success = true,
+                    Message = "Retrieved inventory item types successfully",
+                    Body = InventoryItemTypeDto
+                };
+            }
+            catch (Exception ex)
             {
                 return new ApiResponse
                 {
@@ -35,6 +37,6 @@ namespace InventoryX.Application.Queries.Requests
                 };
 
             }
-        } 
+        }
     }
 }

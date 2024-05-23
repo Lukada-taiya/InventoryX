@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InventoryX.Application.Services
 {
-    public class InventoryTypeService(IBaseRepository<InventoryItemType> baseRepository) : IInventoryTypeService
+    public class InventoryItemTypeService(IBaseRepository<InventoryItemType> baseRepository) : IInventoryItemTypeService
     {
         private readonly IBaseRepository<InventoryItemType> _repository = baseRepository;
         public Task<int> AddInventoryItemType(InventoryItemType entity)

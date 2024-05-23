@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InventoryX.Application.Services.Common
 {
-    public interface IInventoryTypeService
+    public interface IInventoryItemTypeService
     {
         Task<int> AddInventoryItemType(InventoryItemType entity);
         Task<IEnumerable<InventoryItemType>> GetAllInventoryItemTypes();

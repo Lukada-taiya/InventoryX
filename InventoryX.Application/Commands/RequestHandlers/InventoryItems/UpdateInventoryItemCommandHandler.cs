@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using InventoryX.Application.Commands.Requests;
+using InventoryX.Application.Commands.Requests.InventoryItems;
 using InventoryX.Application.Services.Common;
 using InventoryX.Domain.Models;
 using MediatR;
@@ -9,12 +9,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryX.Application.Commands.RequestHandlers
+namespace InventoryX.Application.Commands.RequestHandlers.InventoryItems
 {
-    public class UpdateInventoryItemCommandHandler(IInventoryItemService service, IMapper mapper) : IRequestHandler<UpdateInventoryItemCommand,ApiResponse>
+    public class UpdateInventoryItemCommandHandler(IInventoryItemService service, IMapper mapper) : IRequestHandler<UpdateInventoryItemCommand, ApiResponse>
     {
         private readonly IInventoryItemService _service = service;
-        private readonly IMapper _mapper = mapper; 
+        private readonly IMapper _mapper = mapper;
 
         public async Task<ApiResponse> Handle(UpdateInventoryItemCommand request, CancellationToken cancellationToken)
         {
