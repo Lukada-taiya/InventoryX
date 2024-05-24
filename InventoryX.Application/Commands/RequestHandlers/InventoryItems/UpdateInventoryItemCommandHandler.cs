@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using InventoryX.Application.Commands.Requests.InventoryItems;
+using InventoryX.Application.Commands.Requests.Purchases;
 using InventoryX.Application.Services.Common;
 using InventoryX.Domain.Models;
 using MediatR;

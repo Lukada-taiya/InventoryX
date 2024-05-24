@@ -28,10 +28,10 @@ namespace InventoryX.Application.Commands.RequestHandlers.InventoryItemTypes
                     {
                         Id = response,
                         Success = true,
-                        Message = "Inventory Item has been created successfully"
+                        Message = "Inventory Item Type has been created successfully"
                     };
                 }
-                throw new Exception("Failed to create Inventory Item");
+                throw new Exception("Failed to create Inventory Item Type");
             }
             catch (Exception ex)
             {
