@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using InventoryX.Application.DTOs.InventoryItems;
 using InventoryX.Application.Queries.Requests.InventoryItems;
+using InventoryX.Application.Queries.Requests.Purchases;
 using InventoryX.Application.Services.Common;
 using MediatR;
 using System;
@@ -25,7 +26,7 @@ namespace InventoryX.Application.Queries.RequestHandlers.InventoryItems
                 {
                     Success = true,
                     Message = "Retrieved all inventory items successfully",
-                    Body = response
+                    Body = InventoryItemDtos
                 };
             }
             catch (Exception ex)
