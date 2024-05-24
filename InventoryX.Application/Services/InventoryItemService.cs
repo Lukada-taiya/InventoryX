@@ -24,16 +24,16 @@ namespace InventoryX.Application.Services
 
         public Task<IEnumerable<InventoryItem>> GetAllInventoryItems()
         {
-            return _repository.GetAllAsync();
+            return _repository.GetAllAsync(
+                    i => i.Type
+                );
         }
 
         public Task<InventoryItem> GetInventoryItem(int id)
         {
             return _repository.Get(
                 id,
-                i => i.Type,
-                i => i.Purchases,
-                i => i.Sales
+                i => i.Type
                 );
         }
 

@@ -26,17 +26,17 @@ namespace InventoryX.Infrastructure
             builder.Entity<InventoryItem>().HasOne(e => e.Type).WithMany().HasForeignKey(e => e.TypeId).OnDelete(DeleteBehavior.Restrict);
             builder.Entity<Sale>()
             .HasOne(s => s.Seller)
-            .WithMany(p => p.Sales)
+            .WithMany()
             .HasForeignKey(s => s.UserId)
             .OnDelete(DeleteBehavior.Restrict);
             builder.Entity<Sale>()
             .HasOne(s => s.InventoryItem)
-            .WithMany(p => p.Sales)
+            .WithMany()
             .HasForeignKey(s => s.InventoryItemId)
             .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<Purchase>().HasOne(e => e.InventoryItem).WithMany(e => e.Purchases).HasForeignKey(s => s.InventoryItemId).OnDelete(DeleteBehavior.Restrict);
-            builder.Entity<Purchase>().HasOne(e => e.Purchaser).WithMany(e => e.Purchases).HasForeignKey(s => s.UserId).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Purchase>().HasOne(e => e.InventoryItem).WithMany().HasForeignKey(s => s.InventoryItemId).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Purchase>().HasOne(e => e.Purchaser).WithMany().HasForeignKey(s => s.UserId).OnDelete(DeleteBehavior.Restrict);
         }
 }
 }

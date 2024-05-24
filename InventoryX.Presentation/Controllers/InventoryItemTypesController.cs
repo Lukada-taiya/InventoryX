@@ -1,9 +1,9 @@
 ﻿using InventoryX.Application.Commands.Requests;
-using InventoryX.Application.DTOs;
-using InventoryX.Application.Queries.Requests;
+using InventoryX.Application.Commands.Requests.InventoryItemTypes;
+using InventoryX.Application.DTOs.InventoryItemTypes; 
+using InventoryX.Application.Queries.Requests.InventoryItemTypes;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization; 
 using Microsoft.AspNetCore.Mvc;
 
 namespace InventoryX.Presentation.Controllers
@@ -30,7 +30,7 @@ namespace InventoryX.Presentation.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Add(InventoryTypeCommandDto inventoryItemType)
+        public async Task<ActionResult> Add(InventoryItemTypeCommandDto inventoryItemType)
         {
             if (ModelState.IsValid)
             {
@@ -41,7 +41,7 @@ namespace InventoryX.Presentation.Controllers
         }
         [HttpPut]
         [Route("{id}")]
-        public async Task<ActionResult> Update(int id, InventoryTypeCommandDto inventoryItem)
+        public async Task<ActionResult> Update(int id, InventoryItemTypeCommandDto inventoryItem)
         {
             if(ModelState.IsValid)
             {
