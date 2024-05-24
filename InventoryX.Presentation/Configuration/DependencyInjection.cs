@@ -19,14 +19,18 @@ namespace InventoryX.Presentation.Configuration
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddScoped(typeof(IPurchaseRepository), typeof(PurchaseRepository));
             return services;
         }
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Program).Assembly);
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
-            services.AddTransient<IInventoryItemService, InventoryItemService>();
-            services.AddTransient<IInventoryItemTypeService, InventoryItemTypeService>();
+            services.AddScoped<IInventoryItemService, InventoryItemService>();
+            services.AddScoped<IInventoryItemTypeService, InventoryItemTypeService>();
+            services.AddScoped<IPurchaseService, PurchaseService>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddHttpContextAccessor();
             return services;
         }
         public static IServiceCollection AddPresentation(this IServiceCollection services)
@@ -54,7 +58,9 @@ namespace InventoryX.Presentation.Configuration
         public static IServiceCollection AddAuth(this IServiceCollection services)
         {
             services.AddAuthentication();
-            services.AddIdentityApiEndpoints<User>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddApiEndpoints().AddDefaultTokenProviders();
+
+            //services.AddIdentityApiEndpoints<User>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
             return services;
         }
 
