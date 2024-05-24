@@ -19,8 +19,6 @@ namespace InventoryX.Domain.Models
         [Column(TypeName = "decimal(18,2)")]
         public required decimal Price { get; set; }
         [Column(TypeName = "decimal(17,3)")]
-        public decimal TotalAmount { get; set; }
-        public virtual ICollection<Purchase>? Purchases { get; set; }
-        public virtual ICollection<Sale>? Sales { get; set; }
+        public decimal TotalAmount { get; set; } 
     }
 }
