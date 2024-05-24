@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 namespace InventoryX.Application.DTOs.InventoryItemTypes
 {
     public class GetInventoryItemTypeDto
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public ICollection<InventoryItem>? InventoryItems { get; set; }
+    { 
+        public string Name { get; set; }  
     }
 }
