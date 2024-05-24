@@ -1,7 +1,5 @@
-﻿using InventoryX.Application.Commands.Requests.InventoryItems;
-using InventoryX.Application.Commands.Requests.InventoryItemTypes;
-using InventoryX.Application.DTOs.InventoryItems;
-using InventoryX.Application.DTOs.InventoryItemTypes; 
+﻿using InventoryX.Application.Commands.Requests.InventoryItems; 
+using InventoryX.Application.DTOs.InventoryItems; 
 using InventoryX.Application.Queries.Requests.InventoryItems;
 using MediatR;
 using Microsoft.AspNetCore.Authorization; 
@@ -42,11 +40,11 @@ namespace InventoryX.Presentation.Controllers
         }
         [HttpPut]
         [Route("{id}")]
-        public async Task<ActionResult> Update(int id, InventoryItemTypeCommandDto inventoryItem)
+        public async Task<ActionResult> Update(int id, InventoryItemCommandDto inventoryItem)
         {
             if(ModelState.IsValid)
             {
-                var response = await _mediator.Send(new UpdateInventoryItemTypeCommand { Id = id, InventoryItemTypeDto = inventoryItem });
+                var response = await _mediator.Send(new UpdateInventoryItemCommand { Id = id, InventoryItemDto = inventoryItem });
                 return response.Success ? Ok(response) : BadRequest(response);
             }
             return BadRequest(ModelState);
