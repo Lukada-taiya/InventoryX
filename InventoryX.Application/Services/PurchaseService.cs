@@ -1,4 +1,5 @@
-﻿using InventoryX.Application.Services.Common;
+﻿using InventoryX.Application.Services.IServices;
+using InventoryX.Application.Services.IServices;
 using InventoryX.Domain.Models;
 using InventoryX.Infrastructure.Persistence;
 using System;
@@ -9,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace InventoryX.Application.Services
 {
-    public class PurchaseService(IPurchaseRepository repository, IAuthService authService) : IPurchaseService
+    public class PurchaseService(ISalePurchaseRepository<Purchase> repository, IAuthService authService) : IPurchaseService
     {
-        private readonly IPurchaseRepository _repository = repository;
+        private readonly ISalePurchaseRepository<Purchase> _repository = repository;
         private readonly IAuthService _authService = authService;
         public async Task<int> AddPurchase(Purchase entity)
         {

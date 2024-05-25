@@ -1,4 +1,4 @@
-﻿using InventoryX.Application.Services.Common;
+﻿using InventoryX.Application.Services.IServices;
 using InventoryX.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
