@@ -2,7 +2,7 @@
 using InventoryX.Application.DTOs.InventoryItems;
 using InventoryX.Application.Queries.Requests.InventoryItems;
 using InventoryX.Application.Queries.Requests.Purchases;
-using InventoryX.Application.Services.Common;
+using InventoryX.Application.Services.IServices;
 using MediatR;
 using System;
 using System.Collections.Generic;

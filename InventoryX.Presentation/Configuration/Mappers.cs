@@ -16,7 +16,7 @@ namespace InventoryX.Presentation.Configuration
             CreateMap<PurchaseCommandDto,Purchase>().ReverseMap();
             CreateMap<GetInventoryItemTypeDto, InventoryItemType>().ReverseMap();
             CreateMap<GetInventoryItemDto, InventoryItem>().ReverseMap();
-            CreateMap<GetPurchasesDto, Purchase>().ReverseMap();
+            CreateMap<GetPurchaseDto, Purchase>().ReverseMap();
             CreateMap<GetUserDto, User>().ReverseMap();
         }
     }

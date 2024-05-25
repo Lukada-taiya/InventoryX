@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using InventoryX.Application.DTOs.Purchases;
 using InventoryX.Application.Queries.Requests.Purchases;
-using InventoryX.Application.Services.Common;
+using InventoryX.Application.Services.IServices;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -20,7 +20,7 @@ namespace InventoryX.Application.Queries.RequestHandlers.Purchases
             try
             {
                 var response = await _service.GetPurchase(request.Id) ?? throw new Exception("Purchase does not exist");
-                var PurchaseDto = _mapper.Map<GetPurchasesDto>(response);
+                var PurchaseDto = _mapper.Map<GetPurchaseDto>(response);
                 return new ApiResponse
                 {
                     Success = true,

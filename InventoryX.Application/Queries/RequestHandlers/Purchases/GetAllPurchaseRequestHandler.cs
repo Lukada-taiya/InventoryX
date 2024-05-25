@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using InventoryX.Application.DTOs.Purchases;
-using InventoryX.Application.Queries.Requests.Purchases;
-using InventoryX.Application.Services.Common;
+using InventoryX.Application.Queries.Requests.Purchases; 
+using InventoryX.Application.Services.IServices;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -20,7 +20,7 @@ namespace InventoryX.Application.Queries.RequestHandlers.Purchases
             try
             {
                 var response = await _service.GetAllPurchases() ?? throw new Exception("Failed to retrieve all purchases");
-                var PurchaseDtos = _mapper.Map<IEnumerable<GetPurchasesDto>>(response);
+                var PurchaseDtos = _mapper.Map<IEnumerable<GetPurchaseDto>>(response);
                 return new()
                 {
                     Success = true,

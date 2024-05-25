@@ -1,5 +1,5 @@
-﻿using InventoryX.Application.Services;
-using InventoryX.Application.Services.Common;
+﻿using InventoryX.Application.Services; 
+using InventoryX.Application.Services.IServices;
 using InventoryX.Domain.Models;
 using InventoryX.Infrastructure;
 using InventoryX.Infrastructure.Persistence;
@@ -19,7 +19,7 @@ namespace InventoryX.Presentation.Configuration
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-            services.AddScoped(typeof(IPurchaseRepository), typeof(PurchaseRepository));
+            services.AddScoped(typeof(ISalePurchaseRepository<>), typeof(SalePurchaseRepository<>));
             return services;
         }
         public static IServiceCollection AddApplication(this IServiceCollection services)
