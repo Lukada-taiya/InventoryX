@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -20,7 +21,30 @@ namespace InventoryX.Infrastructure.Persistence
             {
                 throw new InvalidOperationException("Record already exists.");
             }
-             
+
+            // Check if foreign keys exist
+            var properties = typeof(TEntity).GetProperties();
+            foreach (var property in properties)
+            {
+                if (Attribute.IsDefined(property, typeof(ForeignKeyAttribute)))
+                {
+                    var foreignKeyValue = property.GetValue(entity);
+                    if (foreignKeyValue != null)
+                    {
+                        //Removing id part of string to get correct entity type
+                        var nameOfEntity = property.Name[..^2];
+                        var foreignKeyProperty = typeof(TEntity).GetProperty(nameOfEntity);
+                        var foreignEntityType = foreignKeyProperty.PropertyType;
+                        var foreignEntity = await _context.FindAsync(foreignEntityType, foreignKeyValue);
+
+                        if (foreignEntity == null)
+                        {
+                            throw new InvalidOperationException($"Foreign key entity does not exist for property {property.Name} with value {foreignKeyValue}.");
+                        }
+                    }
+                }
+            }
+
             await _context.AddAsync(entity);
             await _context.SaveChangesAsync();
 
@@ -75,6 +99,22 @@ namespace InventoryX.Infrastructure.Persistence
             {
                 // Get the value of the current property in the provided entity
                 var newValue = property.GetValue(entity);
+                if (Attribute.IsDefined(property, typeof(ForeignKeyAttribute)))
+                { 
+                    if (newValue != null)
+                    {
+                        //Removing id part of string to get correct entity type
+                        var nameOfEntity = property.Name[..^2];
+                        var foreignKeyProperty = typeof(TEntity).GetProperty(nameOfEntity);
+                        var foreignEntityType = foreignKeyProperty.PropertyType;
+                        var foreignEntity = await _context.FindAsync(foreignEntityType, newValue);
+
+                        if (foreignEntity == null)
+                        {
+                            throw new InvalidOperationException($"{property.Name} with value {newValue} does not exist.");
+                        }
+                    }
+                }
 
                 // If the new value is not null, update the corresponding property in the existing entity
                 if (newValue != null)

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -14,7 +15,29 @@ namespace InventoryX.Infrastructure.Persistence
         private readonly AppDbContext _appDbContext = appDbContext;
 
         public override async Task<int> Add(T entity)
-        { 
+        {
+            // Check if foreign keys exist
+            var properties = typeof(T).GetProperties();
+            foreach (var property in properties)
+            {
+                if (Attribute.IsDefined(property, typeof(ForeignKeyAttribute)))
+                {
+                    var foreignKeyValue = property.GetValue(entity);
+                    if (foreignKeyValue != null)
+                    {
+                        //Removing id part of string to get correct entity type
+                        var nameOfEntity = property.Name[..^2];
+                        var foreignKeyProperty = typeof(T).GetProperty(nameOfEntity);
+                        var foreignEntityType = foreignKeyProperty.PropertyType;
+                        var foreignEntity = await _appDbContext.FindAsync(foreignEntityType, foreignKeyValue);
+
+                        if (foreignEntity == null)
+                        {
+                            throw new InvalidOperationException($"{property.Name} with value {foreignKeyValue} does not exist.");
+                        }                    
+                    }
+                }
+            }
             await _appDbContext.AddAsync(entity);
             await _appDbContext.SaveChangesAsync();
 
