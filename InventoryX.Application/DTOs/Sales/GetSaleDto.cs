@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryX.Application.DTOs.Purchases
+namespace InventoryX.Application.DTOs.Sales
 {
     public class GetSaleDto : BaseDto
     {
