@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace InventoryX.Application.DTOs.Purchases
 {
-    public class GetPurchasesDto : BaseDto
+    public class GetPurchaseDto : BaseDto
     {        
         public GetInventoryItemDto InventoryItem { get; set; } 
         public decimal Quantity { get; set; } 
