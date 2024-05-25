@@ -10,8 +10,8 @@ namespace InventoryX.Domain.Models
 {
     public class Purchase : BaseModel
     {
-        public int InventoryItemId { get; set; }
         [ForeignKey("InventoryItemId")]
+        public int InventoryItemId { get; set; }
         public required InventoryItem InventoryItem { get; set; }
         [Column(TypeName = "decimal(17,3)")]
         public decimal Quantity { get; set; }
