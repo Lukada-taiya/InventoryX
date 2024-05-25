@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace InventoryX.Application.Commands.RequestHandlers.InventoryItemTypes
 {
-    public class CreateInventoryTypeCommandHandler(IInventoryItemTypeService service, IMapper mapper) : IRequestHandler<CreateInventoryTypeCommand, ApiResponse>
+    public class CreateInventoryItemTypeCommandHandler(IInventoryItemTypeService service, IMapper mapper) : IRequestHandler<CreateInventoryTypeCommand, ApiResponse>
     {
         private readonly IInventoryItemTypeService _service = service;
         private readonly IMapper _mapper = mapper;
