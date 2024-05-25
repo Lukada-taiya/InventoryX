@@ -30,6 +30,7 @@ namespace InventoryX.Presentation.Configuration
             services.AddScoped<IInventoryItemTypeService, InventoryItemTypeService>();
             services.AddScoped<IPurchaseService, PurchaseService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<ISaleService, SaleService>();
             services.AddHttpContextAccessor();
             return services;
         }
