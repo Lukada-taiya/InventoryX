@@ -1,5 +1,4 @@
 ﻿using InventoryX.Application.Services.IServices;
-using InventoryX.Application.Services.IServices;
 using InventoryX.Domain.Models;
 using InventoryX.Infrastructure.Persistence;
 using System;
@@ -10,40 +9,40 @@ using System.Threading.Tasks;
 
 namespace InventoryX.Application.Services
 {
-    public class PurchaseService(ISalePurchaseRepository<Purchase> repository, IAuthService authService) : IPurchaseService
+    public class SaleService(ISalePurchaseRepository<Sale> repository, IAuthService authService) : ISaleService
     {
-        private readonly ISalePurchaseRepository<Purchase> _repository = repository;
+        private readonly ISalePurchaseRepository<Sale> _repository = repository;
         private readonly IAuthService _authService = authService;
-        public async Task<int> AddPurchase(Purchase entity)
+        public async Task<int> AddSale(Sale entity)
         {
             var user = await _authService.GetAuthenticatedUser();
             entity.UserId = user.Id;
             return await _repository.Add(entity);
         }
 
-        public Task<int> DeletePurchase(int id)
+        public Task<int> DeleteSale(int id)
         {
             return _repository.Delete(id);
         }
 
-        public Task<IEnumerable<Purchase>> GetAllPurchases()
+        public Task<IEnumerable<Sale>> GetAllSales()
         {
             return _repository.GetAllAsync(
                     i => i.InventoryItem,
-                    i => i.Purchaser
+                    i => i.Seller
                 );
         }
 
-        public Task<Purchase> GetPurchase(int id)
+        public Task<Sale> GetSale(int id)
         {
             return _repository.Get(
                 id,
                  i => i.InventoryItem,
-                 i => i.Purchaser
+                 i => i.Seller
                 );
         }
 
-        public Task<int> UpdatePurchase(Purchase entity)
+        public Task<int> UpdateSale(Sale entity)
         {
             return _repository.Update(entity);
         }

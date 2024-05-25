@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using InventoryX.Application.Commands.Requests.InventoryItemTypes;
-using InventoryX.Application.Services.Common;
+using InventoryX.Application.Services.IServices;
 using InventoryX.Domain.Models;
 using MediatR;
 using System;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace InventoryX.Application.Commands.RequestHandlers.InventoryItemTypes
 {
-    public class CreateInventoryTypeCommandHandler(IInventoryItemTypeService service, IMapper mapper) : IRequestHandler<CreateInventoryTypeCommand, ApiResponse>
+    public class CreateInventoryItemTypeCommandHandler(IInventoryItemTypeService service, IMapper mapper) : IRequestHandler<CreateInventoryTypeCommand, ApiResponse>
     {
         private readonly IInventoryItemTypeService _service = service;
         private readonly IMapper _mapper = mapper;

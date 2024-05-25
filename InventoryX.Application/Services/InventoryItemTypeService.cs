@@ -1,4 +1,4 @@
-﻿using InventoryX.Application.Services.Common;
+﻿using InventoryX.Application.Services.IServices;
 using InventoryX.Domain.Models;
 using InventoryX.Infrastructure.Persistence;
 using System;

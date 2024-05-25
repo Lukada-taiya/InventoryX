@@ -8,13 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryX.Application.DTOs.Purchases
+namespace InventoryX.Application.DTOs.Sales
 {
-    public class GetPurchasesDto : BaseDto
-    {        
+    public class GetSaleDto : BaseDto
+    {
         public GetInventoryItemDto InventoryItem { get; set; } 
         public decimal Quantity { get; set; } 
-        public decimal Price { get; set; }
-        public GetUserDto Purchaser { get; set; }
+        public decimal Price { get; set; }  
+        public GetUserDto? Seller { get; set; }
     }
 }

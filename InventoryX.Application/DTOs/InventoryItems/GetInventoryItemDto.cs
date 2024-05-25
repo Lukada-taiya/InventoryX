@@ -1,4 +1,5 @@
-﻿using InventoryX.Application.DTOs.InventoryItemTypes;
+﻿using InventoryX.Application.DTOs.Common;
+using InventoryX.Application.DTOs.InventoryItemTypes;
 using InventoryX.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InventoryX.Application.DTOs.InventoryItems
 {
-    public class GetInventoryItemDto
+    public class GetInventoryItemDto : BaseDto
     { 
         public string Name { get; set; }
         public string? Description { get; set; }

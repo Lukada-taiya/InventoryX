@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using InventoryX.Application.Commands.Requests.Purchases;
+using InventoryX.Application.Commands.Requests.Sales;
 using InventoryX.Application.Services.IServices;
 using MediatR;
 using System;
@@ -8,26 +8,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryX.Application.Commands.RequestHandlers.Purchases
+namespace InventoryX.Application.Commands.RequestHandlers.Sales
 {
-    public class DeletePurchaseCommandHandler(IPurchaseService service, IMapper mapper) : IRequestHandler<DeletePurchaseCommand, ApiResponse>
+    public class DeleteSaleCommandHandler(ISaleService service, IMapper mapper) : IRequestHandler<DeleteSaleCommand, ApiResponse>
     {
-        private readonly IPurchaseService _service = service;
+        private readonly ISaleService _service = service;
         private readonly IMapper _mapper = mapper;
-        public async Task<ApiResponse> Handle(DeletePurchaseCommand request, CancellationToken cancellationToken)
+        public async Task<ApiResponse> Handle(DeleteSaleCommand request, CancellationToken cancellationToken)
         {
             try
             {
-                var response = await _service.DeletePurchase(request.Id);
+                var response = await _service.DeleteSale(request.Id);
                 if (response > 0)
                 {
                     return new()
                     {
                         Success = true,
-                        Message = "Purchase has been deleted successfully"
+                        Message = "Sale has been deleted successfully"
                     };
                 }
-                throw new Exception("Failed to delete Purchase");
+                throw new Exception("Failed to delete Sale");
             }
             catch (Exception ex)
             {

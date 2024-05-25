@@ -1,7 +1,6 @@
-﻿using AutoMapper;
-using InventoryX.Application.Commands.Requests.InventoryItems;
-using InventoryX.Application.Commands.Requests.Purchases;
-using InventoryX.Application.Services.Common;
+﻿using AutoMapper; 
+using InventoryX.Application.Commands.Requests.Purchases; 
+using InventoryX.Application.Services.IServices;
 using InventoryX.Domain.Models;
 using MediatR;
 using System;
@@ -21,15 +20,15 @@ namespace InventoryX.Application.Commands.RequestHandlers.Purchases
         {
             try
             {
-                var InventoryItemEntity = _mapper.Map<Purchase>(request.PurchaseDto);
-                InventoryItemEntity.Id = request.Id;
-                InventoryItemEntity.Updated_At = DateTime.UtcNow;
-                var response = await _service.UpdatePurchase(InventoryItemEntity);
+                var PurchaseEntity = _mapper.Map<Purchase>(request.PurchaseDto);
+                PurchaseEntity.Id = request.Id;
+                PurchaseEntity.Updated_At = DateTime.UtcNow;
+                var response = await _service.UpdatePurchase(PurchaseEntity);
                 if (response > 0)
                 {
                     return new()
                     {
-                        Id = InventoryItemEntity.Id,
+                        Id = PurchaseEntity.Id,
                         Success = true,
                         Message = "Purchase has been updated successfully"
                     };

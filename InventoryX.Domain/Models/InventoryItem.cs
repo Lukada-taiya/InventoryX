@@ -12,8 +12,8 @@ namespace InventoryX.Domain.Models
     { 
         public required string Name { get; set; }
         public string? Description { get; set; }
-        public required int TypeId { get; set; }
         [ForeignKey("TypeId")]
+        public required int TypeId { get; set; }
         public virtual InventoryItemType Type { get; set; }
         public byte[]? Image { get; set; }
         [Column(TypeName = "decimal(18,2)")]
