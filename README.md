@@ -5,6 +5,7 @@ An Inventory API service manage the inventory of an organization.
 ## Installation
 
 After cloning the project, use visual studio nuget package manager [Nuget Package Manager](https://learn.microsoft.com/en-us/nuget/consume-packages/install-use-packages-visual-studio) to install all dependencies of this microservice.
+Modify the connection string in appsettings.json to connect the app to your database
 
 ## Usage
 Click on F5 on your keyboard to run the Service. All Available APIs will displayed.
