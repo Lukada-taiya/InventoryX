@@ -11,5 +11,6 @@ namespace InventoryX.Application.Commands.Requests.InventoryItems
     public class CreateInventoryItemCommand : IRequest<ApiResponse>
     {
         public required InventoryItemCommandDto NewInventoryItemDto { get; set; }
+        public decimal RetailQuantity {  get; set; }
     }
 }
