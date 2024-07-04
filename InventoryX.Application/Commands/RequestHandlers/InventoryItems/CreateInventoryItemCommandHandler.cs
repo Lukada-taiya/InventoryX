@@ -20,40 +20,37 @@ namespace InventoryX.Application.Commands.RequestHandlers.InventoryItems
         private readonly IMapper _mapper = mapper;
         public async Task<ApiResponse> Handle(CreateInventoryItemCommand request, CancellationToken cancellationToken)
         {
-            using (var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
+            try
             {
-                try
+                var InventoryItemEntity = _mapper.Map<InventoryItem>(request.NewInventoryItemDto);
+                InventoryItemEntity.Created_At = DateTime.UtcNow;
+                var response = await _service.AddInventoryItem(InventoryItemEntity);
+                if (response > 0)
                 {
-                    var InventoryItemEntity = _mapper.Map<InventoryItem>(request.NewInventoryItemDto);
-                    InventoryItemEntity.Created_At = DateTime.UtcNow;
-                    var response = await _service.AddInventoryItem(InventoryItemEntity);
-                    if (response > 0)
+                    RetailStock retailStock = new() { InventoryItemId = response, Quantity = request.RetailQuantity, Created_At = DateTime.UtcNow };
+                    var result = await _retailStockService.AddRetailStock(retailStock);
+                    if (result > 0)
                     {
-                        RetailStock retailStock = new() { InventoryItemId = response, Quantity = request.RetailQuantity };
-                        var result = await _retailStockService.AddRetailStock(retailStock);
-                        if (result > 0)
+                        transactionScope.Complete();
+                        return new()
                         {
-                            transactionScope.Complete();
-                            return new()
-                            {
-                                Id = response,
-                                Success = true,
-                                Message = "Inventory Item has been created successfully"
-                            };
-                        }
-                        throw new Exception("Failed to create Inventory Item");
-                    }
-                    throw new Exception("Failed to create Inventory Item");
+                            Id = response,
+                            Success = true,
+                            Message = "Inventory Item has been created successfully"
+                        };
+                    } 
                 }
-                catch (Exception ex)
+                throw new Exception("Failed to create Inventory Item");
+            }
+            catch (Exception ex)
+            {
+                transactionScope.Dispose();
+                return new()
                 {
-                    transactionScope.Dispose();
-                    return new()
-                    {
-                        Success = false,
-                        Message = ex.Message ?? "Something went wrong. Try again later."
-                    };
-                }
+                    Success = false,
+                    Message = ex.Message ?? "Something went wrong. Try again later."
+                };
             }
         }
     }
