@@ -32,6 +32,11 @@ namespace InventoryX.Application.Services
             return _repository.Get(id);
         }
 
+        public Task<RetailStock> GetRetailStock(string columnName, object columnValue)
+        {
+            return _repository.Get(columnName, columnValue); 
+        }
+
         public Task<int> UpdateRetailStock(RetailStock entity)
         {
             return _repository.Update(entity);
