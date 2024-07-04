@@ -2,26 +2,36 @@
 using InventoryX.Application.Commands.Requests.InventoryItems;
 using InventoryX.Application.Commands.Requests.Purchases;
 using InventoryX.Application.Services.IServices;
+using InventoryX.Domain.Models;
 using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace InventoryX.Application.Commands.RequestHandlers.InventoryItems
 {
-    public class DeleteInventoryItemCommandHandler(IInventoryItemService service, IMapper mapper) : IRequestHandler<DeleteInventoryItemCommand, ApiResponse>
+    public class DeleteInventoryItemCommandHandler(IInventoryItemService service, IRetailStockService retailStockService) : IRequestHandler<DeleteInventoryItemCommand, ApiResponse>
     {
         private readonly IInventoryItemService _service = service;
-        private readonly IMapper _mapper = mapper;
+        private readonly IRetailStockService _retailStockService = retailStockService; 
         public async Task<ApiResponse> Handle(DeleteInventoryItemCommand request, CancellationToken cancellationToken)
         {
+            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
             try
             {
                 var response = await _service.DeleteInventoryItem(request.Id);
                 if (response > 0)
                 {
+                    RetailStock result = await _retailStockService.GetRetailStock("InventoryItemId", request.Id);
+                    if (result is not null)
+                    {
+                        int deleteResponse = await _retailStockService.DeleteRetailStock(result.Id);
+                        if (deleteResponse <= 0) throw new Exception("Inventory update failed. Failed to delete retail stock.");
+                    }
+                    transactionScope.Complete();
                     return new()
                     {
                         Success = true,
@@ -32,6 +42,7 @@ namespace InventoryX.Application.Commands.RequestHandlers.InventoryItems
             }
             catch (Exception ex)
             {
+                transactionScope.Dispose();
                 return new()
                 {
                     Success = false,
