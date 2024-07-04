@@ -31,7 +31,7 @@ namespace InventoryX.Application.Commands.RequestHandlers.Sales
                         Message = "Sale has been created successfully"
                     };
                 }
-                throw new Exception("Failed to create purchase");
+                throw new Exception("Failed to create sale");
             }
             catch (Exception ex)
             {
