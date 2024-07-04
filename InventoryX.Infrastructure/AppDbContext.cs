@@ -34,10 +34,10 @@ namespace InventoryX.Infrastructure
             .HasOne(s => s.InventoryItem)
             .WithMany()
             .HasForeignKey(s => s.InventoryItemId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Entity<Purchase>().HasOne(e => e.InventoryItem).WithMany().HasForeignKey(s => s.InventoryItemId).OnDelete(DeleteBehavior.Restrict);
-            builder.Entity<Purchase>().HasOne(e => e.Purchaser).WithMany().HasForeignKey(s => s.UserId).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Purchase>().HasOne(e => e.InventoryItem).WithMany().HasForeignKey(s => s.InventoryItemId).OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Purchase>().HasOne(e => e.Purchaser).WithMany().HasForeignKey(s => s.UserId).OnDelete(DeleteBehavior.Restrict); 
         }
 }
 }
