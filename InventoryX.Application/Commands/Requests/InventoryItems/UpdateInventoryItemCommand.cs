@@ -13,5 +13,7 @@ namespace InventoryX.Application.Commands.Requests.InventoryItems
     {
         public int Id { get; set; }
         public required InventoryItemCommandDto InventoryItemDto { get; set; }
+
+        public bool RecordLoss { get; set; }
     }
 }

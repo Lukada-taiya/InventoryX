@@ -13,13 +13,16 @@ namespace InventoryX.Infrastructure.Persistence
     {
         private readonly AppDbContext _context = context;
         public virtual async Task<int> Add(TEntity entity)
-        { 
-            var nameProperty = typeof(TEntity).GetProperty("Name") ?? throw new InvalidOperationException("Name property does not exist.");
-            var nameValue = nameProperty.GetValue(entity)?.ToString(); 
-            var recordExists = await _context.Set<TEntity>().AnyAsync(e => EF.Property<string>(e, "Name") == nameValue);
-            if (recordExists)
+        {
+            var nameProperty = typeof(TEntity).GetProperty("Name");
+            if (nameProperty is not null)
             {
-                throw new InvalidOperationException("Record already exists.");
+                var nameValue = nameProperty.GetValue(entity)?.ToString();
+                var recordExists = await _context.Set<TEntity>().AnyAsync(e => EF.Property<string>(e, "Name") == nameValue);
+                if (recordExists)
+                {
+                    throw new InvalidOperationException("Record already exists.");
+                }
             }
 
             // Check if foreign keys exist
@@ -64,7 +67,7 @@ namespace InventoryX.Infrastructure.Persistence
 
         public async Task<TEntity> Get(int id, params Expression<Func<TEntity, object>>[] includes)
         {
-            IQueryable<TEntity> query = _context.Set<TEntity>();
+            IQueryable<TEntity> query = _context.Set<TEntity>().AsNoTracking();
              
             foreach (var include in includes)
             {
@@ -73,6 +76,20 @@ namespace InventoryX.Infrastructure.Persistence
 
             return await query.FirstOrDefaultAsync(e => EF.Property<int>(e, "Id") == id);
         }
+
+        public async Task<TEntity> Get(string columnName, object columnValue, params Expression<Func<TEntity, object>>[] includes)
+        {
+            IQueryable<TEntity> query = _context.Set<TEntity>().AsNoTracking();
+
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
+
+            // Using EF.Property to dynamically access the specified column
+            return await query.FirstOrDefaultAsync(e => EF.Property<object>(e, columnName).Equals(columnValue));
+        }
+
 
         public async Task<IEnumerable<TEntity>> GetAllAsync(params Expression<Func<TEntity, object>>[] includes)
         {

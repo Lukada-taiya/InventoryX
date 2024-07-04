@@ -29,22 +29,22 @@ namespace InventoryX.Presentation.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Add(InventoryItemCommandDto inventoryItem)
+        public async Task<ActionResult> Add(InventoryItemCommandDto inventoryItem, decimal retailQuantity = 0)
         {
             if (ModelState.IsValid)
             {
-                var response = await _mediator.Send(new CreateInventoryItemCommand { NewInventoryItemDto = inventoryItem });
+                var response = await _mediator.Send(new CreateInventoryItemCommand { NewInventoryItemDto = inventoryItem, RetailQuantity = retailQuantity });
                 return response.Success ? Ok(response) : BadRequest(response);
             }
             return BadRequest(ModelState);
         }
         [HttpPut]
         [Route("{id}")]
-        public async Task<ActionResult> Update(int id, InventoryItemCommandDto inventoryItem)
+        public async Task<ActionResult> Update(int id, InventoryItemCommandDto inventoryItem, bool recordLoss = false)
         {
             if(ModelState.IsValid)
             {
-                var response = await _mediator.Send(new UpdateInventoryItemCommand { Id = id, InventoryItemDto = inventoryItem });
+                var response = await _mediator.Send(new UpdateInventoryItemCommand { Id = id, InventoryItemDto = inventoryItem, RecordLoss = recordLoss });
                 return response.Success ? Ok(response) : BadRequest(response);
             }
             return BadRequest(ModelState);
