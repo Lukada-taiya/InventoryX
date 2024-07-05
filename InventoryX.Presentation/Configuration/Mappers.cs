@@ -2,6 +2,7 @@
 using InventoryX.Application.DTOs.InventoryItems;
 using InventoryX.Application.DTOs.InventoryItemTypes;
 using InventoryX.Application.DTOs.Purchases;
+using InventoryX.Application.DTOs.RetailStock;
 using InventoryX.Application.DTOs.Sales;
 using InventoryX.Application.DTOs.Users;
 using InventoryX.Domain.Models; 
@@ -29,6 +30,8 @@ namespace InventoryX.Presentation.Configuration
                 .ForPath(a => a.Seller, o => o.MapFrom(dto => dto.Seller))
                 .ReverseMap();
             CreateMap<GetUserDto, User>().ReverseMap();
+            CreateMap<RetailStock, RetailStockDto>().ReverseMap();
+            CreateMap<RetailStock, RetailStockCommandDto>().ReverseMap();
         }
     }
 }
