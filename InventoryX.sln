@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryX.Infrastructure.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryX.Application.Tests", "tests\InventoryX.Application.Tests\InventoryX.Application.Tests.csproj", "{96EDF41B-6A9D-4126-B54A-0C8651534A72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryX.Presentation.Tests", "InventoryX.Presentation.Tests\InventoryX.Presentation.Tests.csproj", "{14CC30A1-01F1-45B9-8AAE-58CD44270DF0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryX.Presentation.Tests", "tests\InventoryX.Presentation.Tests\InventoryX.Presentation.Tests.csproj", "{14CC30A1-01F1-45B9-8AAE-58CD44270DF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
