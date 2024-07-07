@@ -5,6 +5,7 @@ using InventoryX.Application.Queries.Requests.RetailStock;
 using InventoryX.Domain.Models;
 using InventoryX.Infrastructure.Persistence;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,7 @@ namespace InventoryX.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class RetailStockController(IMediator mediator) : ControllerBase
     {
         private readonly IMediator _mediator = mediator;
