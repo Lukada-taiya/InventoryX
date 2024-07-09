@@ -2,11 +2,14 @@
 using InventoryX.Application.Services.IServices;
 using InventoryX.Domain.Models;
 using InventoryX.Infrastructure;
-using InventoryX.Infrastructure.Persistence; 
+using InventoryX.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Filters; 
+using Swashbuckle.AspNetCore.Filters;
+using System.Text;
 
 namespace InventoryX.Presentation.Configuration
 {
@@ -37,14 +40,15 @@ namespace InventoryX.Presentation.Configuration
         public static IServiceCollection AddPresentation(this IServiceCollection services)
         {
             services.AddCors(options =>
-            {
-                options.AddPolicy("AllowSpecificOrigin",
-                    builder =>
-                    {
-                        builder.WithOrigins("https://localhost:5173")
-                               .AllowAnyHeader()
-                               .AllowAnyMethod();
-                    });
+            { 
+                    options.AddPolicy("AllowSpecificOrigin",
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:5173") // Ensure the correct port number
+                           .AllowAnyHeader()
+                           .AllowAnyMethod()
+                           .AllowCredentials(); // Include credentials if needed
+                });
             });
             services.AddControllers();
             //Add if only there is a cyclical reference
