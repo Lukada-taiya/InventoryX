@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace InventoryX.Domain.Models
 {
     public class User : IdentityUser
-    { 
+    {
+        public string Name { get; set; }
     }
 }
