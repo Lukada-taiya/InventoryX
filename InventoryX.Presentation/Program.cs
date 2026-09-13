@@ -22,7 +22,7 @@ try
                 "Jwt:SigningKey must be set to a strong secret in Production (not empty or a placeholder).");
     }
 
-    var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+    var port = Environment.GetEnvironmentVariable("PORT") ?? "8000";
     builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
     builder.Host.UseSerilog((context, services, loggerConfiguration) => loggerConfiguration
