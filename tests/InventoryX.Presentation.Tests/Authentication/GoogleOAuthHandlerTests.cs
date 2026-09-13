@@ -58,6 +58,7 @@ public sealed class GoogleOAuthHandlerTests
         };
         var config = new ConfigurationBuilder().AddInMemoryCollection(configValues).Build();
         services.AddSingleton<IConfiguration>(config);
+        services.AddHttpContextAccessor();
 
         var sp = services.BuildServiceProvider();
         var db = sp.GetRequiredService<AppDbContext>();
@@ -83,6 +84,7 @@ public sealed class GoogleOAuthHandlerTests
         var (sp, db, connection) = CreateServices();
         using var _ = connection;
         var httpContext = new DefaultHttpContext { RequestServices = sp };
+        sp.GetRequiredService<IHttpContextAccessor>().HttpContext = httpContext;
 
         var identity = new ClaimsIdentity("Google");
         identity.AddClaim(new Claim(ClaimTypes.Email, "newoauthuser@example.com"));
@@ -123,7 +125,9 @@ public sealed class GoogleOAuthHandlerTests
         tenant.Currency.Should().Be("GHS");
         tenant.BusinessType.Should().Be(BusinessType.Food);
 
-        var subscription = await db.Subscriptions.FirstOrDefaultAsync(s => s.TenantId == tenant.Id);
+        var subscription = await db.Subscriptions
+            .IgnoreQueryFilters()
+            .FirstOrDefaultAsync(s => s.TenantId == tenant.Id);
         subscription.Should().NotBeNull();
         subscription!.Status.Should().Be(SubscriptionStatus.Trialing);
 
