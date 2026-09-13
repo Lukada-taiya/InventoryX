@@ -54,10 +54,30 @@ namespace InventoryX.Infrastructure.Services
                 new(JwtRegisteredClaimNames.Sub, user.Id),
                 new(ClaimTypes.NameIdentifier, user.Id),
                 new(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty),
+                new(JwtRegisteredClaimNames.Name, user.Name ?? user.Email ?? string.Empty),
+                new("name", user.Name ?? user.Email ?? string.Empty),
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new("status", user.Status.ToString()),
             };
-            if (user.TenantId is not null) claims.Add(new Claim("tenant_id", user.TenantId.Value.ToString()));
-            if (role is not null) claims.Add(new Claim(ClaimTypes.Role, role.Name));
+
+            if (user.TenantId is not null)
+            {
+                var tenantIdStr = user.TenantId.Value.ToString();
+                claims.Add(new Claim("tenant_id", tenantIdStr));
+                claims.Add(new Claim("tenantId", tenantIdStr));
+            }
+
+            if (role is not null)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role.Name));
+                claims.Add(new Claim("role", role.Name));
+            }
+
+            if (user.RoleId is not null)
+            {
+                claims.Add(new Claim("role_id", user.RoleId.Value.ToString()));
+            }
+
             claims.Add(new Claim("location_scope", user.LocationScope ?? "*"));
             if (user.IsOwner) claims.Add(new Claim("is_owner", "true"));
             return claims;

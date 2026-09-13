@@ -126,7 +126,13 @@ public static class IdentityApiEndpointRouteBuilderExtensions
 
         // Support both GET and POST for external login to allow direct browser navigation
         routeGroup.MapGet("/external-login", async Task<Results<ChallengeHttpResult, ProblemHttpResult>>
-            ([FromQuery] string provider, [FromQuery] string returnUrl, [FromServices] IServiceProvider sp) =>
+            ([FromQuery] string provider,
+             [FromQuery] string returnUrl,
+             [FromQuery] string? businessName,
+             [FromQuery] string? country,
+             [FromQuery] string? currency,
+             [FromQuery] string? businessType,
+             [FromServices] IServiceProvider sp) =>
         {
             var signInManager = sp.GetRequiredService<SignInManager<TUser>>();
 
@@ -135,6 +141,10 @@ public static class IdentityApiEndpointRouteBuilderExtensions
 
             // Store the final return URL (frontend) in the properties so we can redirect there after authentication
             properties.Items["returnUrl"] = returnUrl;
+            if (!string.IsNullOrWhiteSpace(businessName)) properties.Items["businessName"] = businessName;
+            if (!string.IsNullOrWhiteSpace(country)) properties.Items["country"] = country;
+            if (!string.IsNullOrWhiteSpace(currency)) properties.Items["currency"] = currency;
+            if (!string.IsNullOrWhiteSpace(businessType)) properties.Items["businessType"] = businessType;
 
             // Return a challenge result that will redirect to the external provider
             return TypedResults.Challenge(properties, new[] { provider });
@@ -151,6 +161,10 @@ public static class IdentityApiEndpointRouteBuilderExtensions
 
             // Store the final return URL (frontend) in the properties so we can redirect there after authentication
             properties.Items["returnUrl"] = request.ReturnUrl;
+            if (!string.IsNullOrWhiteSpace(request.BusinessName)) properties.Items["businessName"] = request.BusinessName;
+            if (!string.IsNullOrWhiteSpace(request.Country)) properties.Items["country"] = request.Country;
+            if (!string.IsNullOrWhiteSpace(request.Currency)) properties.Items["currency"] = request.Currency;
+            if (!string.IsNullOrWhiteSpace(request.BusinessType)) properties.Items["businessType"] = request.BusinessType;
 
             // Return a challenge result that will redirect to the external provider
             return TypedResults.Challenge(properties, new[] { request.Provider });

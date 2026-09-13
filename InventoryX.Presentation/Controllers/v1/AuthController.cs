@@ -128,11 +128,20 @@ public sealed class AuthController(ISender sender, IOptions<JwtOptions> jwtOptio
     [HttpGet("google")]
     [HttpPost("google")]
     [AllowAnonymous]
-    public IActionResult Google([FromQuery] string? returnUrl = null)
+    public IActionResult Google(
+        [FromQuery] string? returnUrl = null,
+        [FromQuery] string? businessName = null,
+        [FromQuery] string? country = null,
+        [FromQuery] string? currency = null,
+        [FromQuery] string? businessType = null)
     {
         var allowedOrigins = configuration.GetSection("Frontend:AllowedOrigins").Get<string[]>() ?? [];
         var properties = new AuthenticationProperties();
         properties.Items["returnUrl"] = SafeReturnUrl.Normalize(returnUrl, allowedOrigins);
+        if (!string.IsNullOrWhiteSpace(businessName)) properties.Items["businessName"] = businessName;
+        if (!string.IsNullOrWhiteSpace(country)) properties.Items["country"] = country;
+        if (!string.IsNullOrWhiteSpace(currency)) properties.Items["currency"] = currency;
+        if (!string.IsNullOrWhiteSpace(businessType)) properties.Items["businessType"] = businessType;
         return Challenge(properties, GoogleDefaults.AuthenticationScheme);
     }
 

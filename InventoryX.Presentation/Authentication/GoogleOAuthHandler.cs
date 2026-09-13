@@ -2,6 +2,7 @@ using System.Security.Claims;
 using InventoryX.Application.Options;
 using InventoryX.Application.Services.IServices;
 using InventoryX.Domain.Models;
+using InventoryX.Domain.Models.Tenancy;
 using InventoryX.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
@@ -54,15 +55,64 @@ public static class GoogleOAuthHandler
 
         if (user == null)
         {
-            logger.LogInformation("Creating new user for email: {Email}", email);
+            logger.LogInformation("Creating new user and tenant for email: {Email}", email);
 
-            user = new User();
+            string? inputBusinessName = null;
+            string? inputCountry = null;
+            string? inputCurrency = null;
+            string? inputBusinessType = null;
+
+            if (context.Properties?.Items != null)
+            {
+                context.Properties.Items.TryGetValue("businessName", out inputBusinessName);
+                context.Properties.Items.TryGetValue("country", out inputCountry);
+                context.Properties.Items.TryGetValue("currency", out inputCurrency);
+                context.Properties.Items.TryGetValue("businessType", out inputBusinessType);
+            }
+
+            var googleName = context.Principal?.FindFirstValue(ClaimTypes.Name);
+            var businessName = !string.IsNullOrWhiteSpace(inputBusinessName)
+                ? inputBusinessName
+                : !string.IsNullOrWhiteSpace(googleName)
+                    ? $"{googleName}'s Organization"
+                    : $"{email}'s Workspace";
+
+            var country = !string.IsNullOrWhiteSpace(inputCountry) ? inputCountry.ToUpperInvariant() : "GH";
+            var currency = !string.IsNullOrWhiteSpace(inputCurrency) ? inputCurrency.ToUpperInvariant() : "GHS";
+
+            if (!Enum.TryParse<BusinessType>(inputBusinessType, ignoreCase: true, out var businessType))
+                businessType = BusinessType.Retail;
+
+            const string initialChecklist =
+                """{"createLocation":false,"addProducts":false,"openingStock":false,"inviteUsers":false,"firstSale":false}""";
+
+            var tenant = new Tenant
+            {
+                Name = businessName,
+                Country = country,
+                Currency = currency,
+                BusinessType = businessType,
+                OnboardingChecklist = initialChecklist,
+                RequireExpiryOnBatchReceipt = businessType is BusinessType.Food or BusinessType.Pharmacy,
+                BillingEmail = email,
+            };
+
+            db.Tenants.Add(tenant);
+            await db.SaveChangesAsync();
+
+            var ownerRole = await db.AppRoles.FirstOrDefaultAsync(r => r.Name == "Owner");
+
+            user = new User
+            {
+                TenantId = tenant.Id,
+                IsOwner = true,
+                RoleId = ownerRole?.Id,
+                LocationScope = "*",
+                Name = !string.IsNullOrWhiteSpace(googleName) ? googleName : businessName,
+            };
+
             await userManager.SetUserNameAsync(user, email);
             await userManager.SetEmailAsync(user, email);
-
-            var name = context.Principal?.FindFirstValue(ClaimTypes.Name);
-            if (!string.IsNullOrEmpty(name))
-                user.Name = name;
 
             var createResult = await userManager.CreateAsync(user);
             if (!createResult.Succeeded)
@@ -78,7 +128,24 @@ public static class GoogleOAuthHandler
             var loginInfo = new UserLoginInfo(context.Scheme.Name, nameIdentifier, context.Scheme.DisplayName);
             await userManager.AddLoginAsync(user, loginInfo);
 
-            logger.LogInformation("User created successfully: {Email}", email);
+            var professionalPlan = await db.PlanDefinitions
+                .FirstOrDefaultAsync(p => p.Tier == PlanTier.Professional && p.IsActive);
+            if (professionalPlan != null)
+            {
+                var now = DateTime.UtcNow;
+                db.Subscriptions.Add(new Subscription
+                {
+                    TenantId = tenant.Id,
+                    PlanDefinitionId = professionalPlan.Id,
+                    Status = SubscriptionStatus.Trialing,
+                    TrialEndsAt = now.AddDays(14),
+                    CurrentPeriodStart = now,
+                    CurrentPeriodEnd = now.AddDays(14),
+                });
+                await db.SaveChangesAsync();
+            }
+
+            logger.LogInformation("User and tenant created successfully: {Email}, TenantId: {TenantId}", email, tenant.Id);
         }
         else
         {
